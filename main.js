@@ -10,27 +10,31 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 function movingHunter(event) {
 
-	console.log(event)
 
-	console.log(event.key)
 
 	let key = event.key
 	let panacek = document.querySelector('#panacek');
 
-	if (key === "ArrowDown"){
-		panacek.style.left = '25px';
+	if (key === "ArrowDown"){	
+		let moveDown = parseInt(window.getComputedStyle(panacek).top);
+		panacek.style.top = (moveDown + 20) +'px';
 	}
 	if (key === "ArrowUp"){
-		panacek.style.left = '25px';
+		let moveUp = parseInt(window.getComputedStyle(panacek).top);
+		panacek.style.top = (moveUp - 20) +'px';
 	}
 	if (key === "ArrowLeft"){
-		panacek.style.left = '25px';
+		let moveLeft = parseInt(window.getComputedStyle(panacek).left);
+		panacek.style.left = (moveLeft - 20) +'px';
 	}
 	if (key === "ArrowRight"){
-		panacek.style.left = '25px';
+		let moveRight = parseInt(window.getComputedStyle(panacek).left);
+		panacek.style.left = (moveRight + 20) +'px';
 	}
+
 }
 
-// na celym dokumentu pri stisku jakekoliv klavsy se zavola moje funkce moviengHunter
+// na celem dokumentu se pri stisku jakekoliv klavesy zavola funkce movingHunter
+
 document.addEventListener("keydown", movingHunter);
 
