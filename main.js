@@ -49,6 +49,10 @@ let panacek = document.querySelector('#panacek');
 			panacek.style.left = x +'px';
 		}	
 	}
+
+	if (!( x + 70 < xCoin || xCoin + 36 < x || y + 64 < yCoin || yCoin + 36 < y)) {
+		movingCoin();
+	}
 }
 
 let xCoin = 0;
@@ -71,7 +75,6 @@ function movingCoin(){
 	coin.style.left = xCoin +'px';
 	coin.style.top = yCoin + 'px';
 }
-
 
 window.addEventListener('load', movingCoin);
 
