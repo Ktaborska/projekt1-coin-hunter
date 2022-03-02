@@ -19,6 +19,7 @@ let key = event.key
 let panacek = document.querySelector('#panacek');
 
 	if (key === "ArrowDown"){
+		panacek.src = 'obrazky/panacek.png';
 		if(y+20+64 < height){
 			y = y+20;
 			panacek.style.top = y +'px';
@@ -26,6 +27,7 @@ let panacek = document.querySelector('#panacek');
 	}
 
 	if (key === "ArrowUp"){
+		panacek.src = 'obrazky/panacek-nahoru.png';
 		if(y-20 < 0){
 			panacek.style.top='0px'
 		}else{
@@ -35,6 +37,7 @@ let panacek = document.querySelector('#panacek');
 	}
 
 	if (key === "ArrowLeft"){
+		panacek.src = 'obrazky/panacek-vlevo.png';
 		if(x-20 < 0){
 			panacek.style.left='0px'
 		}else{
@@ -44,6 +47,7 @@ let panacek = document.querySelector('#panacek');
 	}
 
 	if (key === "ArrowRight"){
+		panacek.src = 'obrazky/panacek-vpravo.png';
 		if((x+20+70) < width){
 			x = x+20;
 			panacek.style.left = x +'px';
