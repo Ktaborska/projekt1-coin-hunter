@@ -69,16 +69,3 @@ function movingHunter(event) {
 // na celem dokumentu se pri stisku jakekoliv klavesy zavola funkce movingHunter
 
 document.addEventListener("keydown", movingHunter);
-
-let coin = document.querySelector('#mince');
-//let coinMovement = Math.floor(Math.random () *();
-
-function movingCoin (event){
-
-let coin = document.querySelector('#mince');
-let coinMovement = Math.random ;
-
-}
-
-
-document.addEventListener("load", movingCoin);
