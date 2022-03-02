@@ -1,56 +1,54 @@
-// toto budeš potřebovat později
-/*
-if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
-	// panacek a mince se prekryvaji
-}
-*/
 
 document.addEventListener("keydown", movingHunter);
-
-let x = 0;
-let y = 0;
-const movement = 20;
 let height = window.innerHeight;
 let width = window.innerWidth;
+
+let x = (width/2)-35;
+let y = (height/2)-32;
+document.querySelector('#panacek').style.top = y+'px';
+document.querySelector('#panacek').style.left = x+'px';
+
+const movement = 20;
+
 
 function movingHunter(event) {
 
 let key = event.key
-let panacek = document.querySelector('#panacek');
+let hunter = document.querySelector('#panacek');
 
 	if (key === "ArrowDown"){
-		panacek.src = 'obrazky/panacek.png';
+		hunter.src = 'obrazky/panacek.png';
 		if(y+20+64 < height){
 			y = y+20;
-			panacek.style.top = y +'px';
+			hunter.style.top = y +'px';
 		}
 	}
 
 	if (key === "ArrowUp"){
-		panacek.src = 'obrazky/panacek-nahoru.png';
+		hunter.src = 'obrazky/panacek-nahoru.png';
 		if(y-20 < 0){
-			panacek.style.top='0px'
+			hunter.style.top='0px'
 		}else{
 			y = y-20;
-			panacek.style.top = y +'px';
+			hunter.style.top = y +'px';
 			}
 	}
 
 	if (key === "ArrowLeft"){
-		panacek.src = 'obrazky/panacek-vlevo.png';
+		hunter.src = 'obrazky/panacek-vlevo.png';
 		if(x-20 < 0){
-			panacek.style.left='0px'
+			hunter.style.left='0px'
 		}else{
 			x = x-20;
-			panacek.style.left = x +'px';
+			hunter.style.left = x +'px';
 		}
 	}
 
 	if (key === "ArrowRight"){
-		panacek.src = 'obrazky/panacek-vpravo.png';
+		hunter.src = 'obrazky/panacek-vpravo.png';
 		if((x+20+70) < width){
 			x = x+20;
-			panacek.style.left = x +'px';
+			hunter.style.left = x +'px';
 		}	
 	}
 
