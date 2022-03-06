@@ -12,6 +12,13 @@ const movement = 20;
 
 
 function movingHunter(event) {
+	
+	if(score===5){
+		alert("Výhra");
+		score=0;
+		document.querySelector('#score').innerHTML = score;
+	}
+	
 
 let key = event.key
 let hunter = document.querySelector('#panacek');
@@ -66,8 +73,6 @@ let hunter = document.querySelector('#panacek');
 		}else{
 			coinSound.play();
 		}
-
-		
 	}
 
 }
