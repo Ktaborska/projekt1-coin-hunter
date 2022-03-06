@@ -1,7 +1,7 @@
-
 document.addEventListener("keydown", movingHunter);
 let height = window.innerHeight;
 let width = window.innerWidth;
+let score = 0;
 
 let x = (width/2)-35;
 let y = (height/2)-32;
@@ -52,9 +52,24 @@ let hunter = document.querySelector('#panacek');
 		}	
 	}
 
+	let coinSound = document.querySelector('#zvukmince');
+	let victorySound = document.querySelector('#zvukfanfara')
+	
+	
 	if (!( x + 70 < xCoin || xCoin + 36 < x || y + 64 < yCoin || yCoin + 36 < y)) {
 		movingCoin();
+		score++;
+		document.querySelector('#score').innerHTML = score; 
+
+		if(score===5){
+			victorySound.play();
+		}else{
+			coinSound.play();
+		}
+
+		
 	}
+
 }
 
 let xCoin = 0;
@@ -79,6 +94,5 @@ function movingCoin(){
 }
 
 window.addEventListener('load', movingCoin);
-
 
 
