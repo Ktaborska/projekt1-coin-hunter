@@ -8,32 +8,28 @@ let width = window.innerWidth;
 let score = 0;
 
 //výchozí pozice huntera
-let x = (width/2)-35;
-let y = (height/2)-32;
+let hunter = document.querySelector('#panacek');
+let hunterWidth = hunter.naturalWidth;
+let hunterHeight = hunter.naturalHeight;
+let x = (width/2)-(hunterWidth/2);
+let y = (height/2)-(hunterHeight/2);
 
 //napozicování huntera
-let hunter = document.querySelector('#panacek');
 hunter.style.top = y+'px';
 hunter.style.left = x+'px';
 
 //pohyb 20px
 const movement = 20;
 
+//funkce pro pohyb huntera
 function movingHunter(event) {
-	
-	if(score===5){
-		alert("Výhra");
-		score=0;
-		document.querySelector('#score').innerHTML = score;
-	}
-	
 	//proměnná pro klávesu
 	let key = event.key
 	console.log(event.key) 
 
 	if (key === "ArrowDown"){
 		hunter.src = 'obrazky/panacek.png';
-		if(y + movement + 64 < height){
+		if(y + movement + hunterHeight < height){
 			y = y + movement;
 			hunter.style.top = y +'px';
 		}
@@ -57,28 +53,13 @@ function movingHunter(event) {
 
 	if (key === "ArrowRight"){
 		hunter.src = 'obrazky/panacek-vpravo.png';
-		if((x + movement + 70) < width){
+		if((x + movement + hunterWidth) < width){
 			x = x + movement;
 			hunter.style.left = x +'px';
 		}	
 	}
 
-	//proměnné pro audio
-	let coinSound = document.querySelector('#zvukmince');
-	let victorySound = document.querySelector('#zvukfanfara');
-	
-	//if (!( x + 70 < xCoin || xCoin + 36 < x || y + 64 < yCoin || yCoin + 36 < y)) {
-	if (( x + 70 > xCoin && xCoin + 36 > x && y + 64 > yCoin && yCoin + 36 > y)) {
-		movingCoin();
-		score++;
-		document.querySelector('#score').innerHTML = score; 
-
-		if(score===5){
-			victorySound.play();
-		}else{
-			coinSound.play();
-		}
-	}
+	collision();
 }
 
 //při načtení stránky se zavolá funkce movingCoin
@@ -88,6 +69,7 @@ window.addEventListener('load', movingCoin);
 let xCoin = 0;
 let yCoin = 0;
 
+//funkce pro náhodný pohyb mince
 function movingCoin(){
 	
 	let coin = document.querySelector('#mince');
@@ -105,4 +87,64 @@ function movingCoin(){
 
 	coin.style.left = xCoin +'px';
 	coin.style.top = yCoin + 'px';
+}
+
+//funkce pro kolizi
+function collision(){
+	//proměnné pro audio
+	let coinSound = document.querySelector('#zvukmince');
+	let victorySound = document.querySelector('#zvukfanfara');
+	
+	//if (!( x + hunterWidth < xCoin || xCoin + 36 < x || y + hunterHeight < yCoin || yCoin + 36 < y)) {
+	if (( x + hunterWidth > xCoin && xCoin + 36 > x && y + hunterHeight > yCoin && yCoin + 36 > y)) {
+		movingCoin();
+		score++;
+		document.querySelector('#score').innerHTML = score; 
+
+		if(score===5){
+			let overlay = document.querySelector('.overlay');
+			overlay.style.display = 'block';
+			victorySound.play();
+		}else{
+			coinSound.play();
+		}
+	}
+}
+
+//funkce pro začátek nové hry
+function newGame (){
+	let overlay = document.querySelector('.overlay');
+	overlay.style.display = 'none';
+	score=0;
+	document.querySelector('#score').innerHTML = score;
+	x = (width/2)-(hunterWidth/2);
+	y = (height/2)-(hunterHeight/2);
+	hunter.style.top = y+'px';
+	hunter.style.left = x+'px';
+	hunter.src = 'obrazky/panacek.png';
+}
+
+//funkce pro konec hry
+function endGame(){
+	alert('Jsi v pasti, tato hra nikdy nekončí!'); 
+	newGame();
+}
+
+let musicPlay = 'hraje';
+
+//fuknce pro zvukový podkres
+function backgroundSound(){
+	let music = document.querySelector('#hudba');
+	let bgSound = document.querySelector('.backgroundSound');
+
+	if (musicPlay === 'hraje'){
+		musicPlay = 'nehraje';
+		bgSound.src = 'obrazky/mute.png';
+		music.pause();
+	}
+	else if (musicPlay === 'nehraje'){
+		musicPlay = 'hraje';
+		music.play();
+		bgSound.src = 'obrazky/volume.png';
+	}
 }
